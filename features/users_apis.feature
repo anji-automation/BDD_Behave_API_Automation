@@ -8,7 +8,7 @@ Feature: Users API cases using POM model
     And the user api response text contains '12'
 
 
-  @test2
+  @sanity
   Scenario: Create the users record
     Given the user gather the end url 'https://reqres.in/api/users?page=2'
     When the user pass the below data to send POST API
@@ -26,7 +26,7 @@ Feature: Users API cases using POM model
     Then api response status code should be 200
     And the user api response text contains 'ram'
 
-  @test45
+  @regression
   Scenario: Delete the user record
     Given the user gather the end url 'https://reqres.in/api/users/20'
     When the user send the delete api request
