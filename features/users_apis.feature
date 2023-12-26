@@ -17,7 +17,7 @@ Feature: Users API cases using POM model
     Then api response status code should be 201
     And the user api response text contains 'morpheus'
 
-  @test4
+  @sanity
   Scenario: Update the users record-PUT
     Given the user gather the end url 'https://reqres.in/api/users/2'
     When the user pass the below data to send PUT API
