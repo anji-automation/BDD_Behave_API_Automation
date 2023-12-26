@@ -26,7 +26,7 @@ Feature: Users API cases using POM model
     Then api response status code should be 200
     And the user api response text contains 'ram'
 
-  @test4
+  @test456
   Scenario: Delete the user record
     Given the user gather the end url 'https://reqres.in/api/users/20'
     When the user send the delete api request
