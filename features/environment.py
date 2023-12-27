@@ -8,7 +8,8 @@ def before_scenario(context, scenario):
         context.url = "https://reqres.in/api/users/2"
     elif 'Delete' in scenario.name:
         context.url = "https://reqres.in/api/users/20"
-
+    else:
+        pass
 def before_step(context, step):
     print("This hook method works before every step is running....")
 
