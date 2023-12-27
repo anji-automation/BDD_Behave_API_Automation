@@ -29,6 +29,6 @@ Example: ~/BDD_Behave_API_Automation/features behave users_api_pom.feature
 ### To run the individual scenarios by using tags: behave --tags=@<tag_name>
 Example: ~/BDD_Behave_API_Automation/features behave --tags @smoke
 
-### To run the scenario by passing the data from behave command:
+### To run the scenario by passing the input from behave command:
 ~/BDD_Behave_API_Automation/features behave pass_input_from_commandline.feature -D url="https://reqres.in/api/users" 
 
