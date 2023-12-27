@@ -3,8 +3,6 @@ import requests
 
 @given("the user get the base url from command line")
 def url(context):
-    #import sys, pdb;
-    #pdb.Pdb(stdout=sys.__stdout__).set_trace()
     context.base_url = context.config.userdata.get('url')
 
 @when("the user perform the get operation")

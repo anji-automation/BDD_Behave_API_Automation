@@ -3,10 +3,10 @@ import requests
 from pages.users_page import UsersAPI
 
 
-@given("the user gather the end url '{url}'")
-def end_url(context, url):
+@given("the user gather the api url")
+def end_url(context):
     context.api_page = UsersAPI()
-    context.api_page.set_url(url)
+    context.api_page.set_url(context.url) # context.url value got from before_scenario hook method
 
 @when("the user send the API Get request")
 def users_get(context):
@@ -14,7 +14,7 @@ def users_get(context):
 
 @then("api response status code should be {status}")
 def users_status(context, status):
-    assert context.api_page.get_response_status() == int(status), "There is issue with response status...."
+    assert context.api_page.get_response_status() == int(status), "Status code should be"+status+" But actual status code is "+str(context.api_page.get_response_status())
 
 @then("the user api response text contains '{text}'")
 def users_response(context, text):
@@ -44,4 +44,3 @@ def update_user(context):
 @when("the user send the delete api request")
 def delete_req(context):
     context.api_page.delete_users_api()
-
