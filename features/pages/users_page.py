@@ -1,7 +1,6 @@
 import requests
 
 class UsersAPI:
-
     def __init__(context):
         context.url = None
         context.response = None

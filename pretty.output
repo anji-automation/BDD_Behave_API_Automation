@@ -1,0 +1,85 @@
+Feature: To check the command line data # features/pass_input_from_commandline.feature:1
+
+  Scenario: Command line data check                   # features/pass_input_from_commandline.feature:4
+    Given the user get the base url from command line # features/steps/pass_input_from_commandline_steps.py:4
+    When the user perform the get operation           # features/steps/pass_input_from_commandline_steps.py:8
+      Traceback (most recent call last):
+        File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/behave/model.py", line 1329, in run
+          match.run(runner.context)
+        File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/behave/matchers.py", line 98, in run
+          self.func(context, *args, **kwargs)
+        File "features/steps/pass_input_from_commandline_steps.py", line 10, in get
+          context.resp = requests.get(url=context.base_url)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/requests/api.py", line 73, in get
+          return request("get", url, params=params, **kwargs)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/requests/api.py", line 59, in request
+          return session.request(method=method, url=url, **kwargs)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/requests/sessions.py", line 575, in request
+          prep = self.prepare_request(req)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^
+        File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/requests/sessions.py", line 486, in prepare_request
+          p.prepare(
+        File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/requests/models.py", line 368, in prepare
+          self.prepare_url(url, params)
+        File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/requests/models.py", line 439, in prepare_url
+          raise MissingSchema(
+      requests.exceptions.MissingSchema: Invalid URL 'None': No scheme supplied. Perhaps you meant https://None?
+      
+      Captured stdout:
+      This hook method works before every step is running....
+      This hook method works after every step is running....
+      This hook method works before every step is running....
+      This hook method works after every step is running....
+
+    Then the user response status should be 200       # None
+
+Feature: To cover the scenario outline example # features/scenario_outline_cases.feature:1
+
+  Scenario Outline: Create the users record -- @1.1                                # features/scenario_outline_cases.feature:11
+    Given the user gather the api url                                              # features/steps/users_api_pom_steps.py:6
+    When the user pass the siva and teamlead payload data to create the API record # features/steps/scenario_outline_steps.py:3
+    Then api response status code should be 201                                    # features/steps/users_api_pom_steps.py:15
+    And the user api response text contains 'siva'                                 # features/steps/users_api_pom_steps.py:19
+
+  Scenario Outline: Create the users record -- @1.2                                # features/scenario_outline_cases.feature:12
+    Given the user gather the api url                                              # features/steps/users_api_pom_steps.py:6
+    When the user pass the ram and developer payload data to create the API record # features/steps/scenario_outline_steps.py:3
+    Then api response status code should be 201                                    # features/steps/users_api_pom_steps.py:15
+    And the user api response text contains 'ram'                                  # features/steps/users_api_pom_steps.py:19
+
+Feature: Users API cases using POM model # features/users_api_pom.feature:1
+
+  @smoke
+  Scenario: Get the users details                # features/users_api_pom.feature:4
+    Given the user gather the api url            # features/steps/users_api_pom_steps.py:6
+    When the user send the API Get request       # features/steps/users_api_pom_steps.py:11
+    Then api response status code should be 200  # features/steps/users_api_pom_steps.py:15
+    And the user api response text contains '12' # features/steps/users_api_pom_steps.py:19
+
+  @sanity
+  Scenario: Create the users record                    # features/users_api_pom.feature:12
+    Given the user gather the api url                  # features/steps/users_api_pom_steps.py:6
+    When the user pass the below data to send POST API # features/steps/users_api_pom_steps.py:26
+      | name     | job    |
+      | morpheus | leader |
+    Then api response status code should be 201        # features/steps/users_api_pom_steps.py:15
+    And the user api response text contains 'morpheus' # features/steps/users_api_pom_steps.py:19
+
+  @sanity
+  Scenario: Update the users record-PUT               # features/users_api_pom.feature:21
+    Given the user gather the api url                 # features/steps/users_api_pom_steps.py:6
+    When the user pass the below data to send PUT API # features/steps/users_api_pom_steps.py:35
+      | updated_name | updated_job |
+      | ram          | automation  |
+    Then api response status code should be 200       # features/steps/users_api_pom_steps.py:15
+    And the user api response text contains 'ram'     # features/steps/users_api_pom_steps.py:19
+
+  @regression
+  Scenario: Delete the user record              # features/users_api_pom.feature:30
+    Given the user gather the api url           # features/steps/users_api_pom_steps.py:6
+    When the user send the delete api request   # features/steps/users_api_pom_steps.py:44
+    Then api response status code should be 204 # features/steps/users_api_pom_steps.py:15
+
